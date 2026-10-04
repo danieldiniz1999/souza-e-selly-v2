@@ -6,7 +6,7 @@ Landing page institucional de alto padrão desenvolvida para o escritório **Sou
 
 ## 🏛️ Sobre o Escritório
 
-- **Sócias Fundadoras:** Dra. Samara Selly e Dra. Mariana Souza
+- **Sócias Fundadoras:** Dra. Samara Selly e Dra. Maria Souza
 - **Atuação:** Direito Previdenciário (INSS), Direito Trabalhista e Direito Cível
 - **Sede:** Av. Jovita Feitosa, nº 3072, Parquelândia, Fortaleza - CE, CEP 60455-410
 - **Horário de Atendimento:** 09:00 às 17:00 (Segunda a Sexta)
@@ -33,7 +33,7 @@ souza-e-selly-v2/
 ├── assets/
 │   ├── favicon.svg          # Monograma vetorial dourado S&S
 │   ├── dra-samara.jpg       # Retrato institucional Dra. Samara Selly
-│   └── dra-mariana.jpg      # Retrato institucional Dra. Mariana Souza
+│   └── dra-maria.jpg        # Retrato institucional Dra. Maria Souza
 ├── css/
 │   └── styles.css           # Design system completo e responsivo (Dark & Gold)
 ├── js/
