@@ -303,6 +303,23 @@ body::before {
   opacity: 0.85;
 }
 
+.brand-logo {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #000;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+.brand:hover .brand-logo {
+  transform: scale(1.06);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.45);
+}
+
 .brand-text {
   display: flex;
   flex-direction: column;
@@ -417,6 +434,36 @@ body::before {
 
 .hero-copy {
   z-index: 2;
+}
+
+.hero-seal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 6px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+  backdrop-filter: blur(8px);
+}
+.hero-seal-badge .seal-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  object-fit: contain;
+  background: #000;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+  display: block;
+}
+.hero-seal-badge span {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-light);
 }
 
 .hero-title {
@@ -710,6 +757,46 @@ body::before {
   gap: 52px;
   align-items: start;
 }
+
+.about-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 6px 14px 6px 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+}
+.about-seal .seal-emblem {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  object-fit: contain;
+  background: #000;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+  flex-shrink: 0;
+  display: block;
+}
+.about-seal-text {
+  display: flex;
+  flex-direction: column;
+}
+.about-seal-text .seal-title {
+  font-family: var(--font-serif);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: 0.02em;
+}
+.about-seal-text .seal-sub {
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-hue);
+}
+
 .about-copy .lead {
   margin-bottom: 24px;
 }
@@ -1305,6 +1392,34 @@ body::before {
   flex-direction: column;
   gap: 24px;
 }
+
+.contact-brand-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.contact-brand-head .seal-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  object-fit: contain;
+  background: #000;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+  flex-shrink: 0;
+  display: block;
+}
+.contact-brand-head strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+
 .info-list {
   list-style: none;
   display: flex;
