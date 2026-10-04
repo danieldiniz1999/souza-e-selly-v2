@@ -1685,23 +1685,112 @@ body::before {
   transform: translate(0) scale(1);
 }
 
-/* ---------- RESPONSIVIDADE ---------- */
-@media (max-width: 1024px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+/* ---------- RESPONSIVIDADE COMPLETA (PC, TABLET, MOBILE) ---------- */
+
+/* 1. LAPTOPS E TELAS MÉDIAS (max-width: 1199px) */
+@media (max-width: 1199px) {
+  .wrap {
+    max-width: 960px;
+    padding: 0 20px;
   }
-  .hero-visual {
-    order: -1;
+  .nav {
+    gap: 16px;
+  }
+  .nav a:not(.btn) {
+    font-size: 0.8rem;
+  }
+  .hero-grid {
+    gap: 36px;
   }
   .map-stage {
     max-width: 300px;
   }
+  .team-grid {
+    gap: 24px;
+  }
+}
+
+/* 2. TABLETS (max-width: 991px) */
+@media (max-width: 991px) {
+  /* Header & Navigation Drawer */
+  .header-inner {
+    height: 60px;
+  }
+  .burger {
+    display: flex;
+    z-index: 1001;
+  }
+  .nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(6, 6, 6, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 24px 40px;
+    gap: 20px;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.32s var(--ease-editorial), opacity 0.32s ease;
+    border-bottom: 1px solid var(--border-gold);
+    z-index: 999;
+  }
+  .nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav a:not(.btn) {
+    font-size: 1.12rem;
+    font-family: var(--font-serif);
+    color: var(--text-white);
+    padding: 6px 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .nav-cta {
+    width: 100%;
+    margin-top: 12px;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.88rem;
+  }
+
+  /* Scroll lock when mobile/tablet menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* Hero Section: Conteúdo primeiro, Mapa depois */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: left;
+  }
+  .hero-visual {
+    order: 2; /* Mantém o texto no topo e o mapa interativo logo abaixo */
+    margin: 0 auto;
+  }
+  .map-stage {
+    max-width: 320px;
+  }
+
+  /* Grids adaptáveis para Tablet */
   .stats {
     grid-template-columns: repeat(2, 1fr);
+    gap: 28px 20px;
   }
   .areas-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   .about-grid,
   .interior-grid,
@@ -1711,111 +1800,193 @@ body::before {
     grid-template-columns: 1fr;
     gap: 36px;
   }
+
+  /* Advogadas no Tablet */
   .team-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
   .member {
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 200px 1fr;
   }
+
+  /* Rodapé no Tablet */
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+  }
+  .footer-brand {
+    grid-column: span 2;
   }
 }
 
-@media (max-width: 768px) {
+/* 3. MOBILE SMARTPHONES (max-width: 767px) */
+@media (max-width: 767px) {
   .header-inner {
-    height: 58px;
+    height: 56px;
   }
   .nav {
-    position: fixed;
-    top: 58px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(7, 7, 7, 0.98);
-    backdrop-filter: blur(18px);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 28px 22px;
-    gap: 18px;
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.3s var(--ease-editorial), opacity 0.3s ease;
-    border-bottom: 1px solid var(--border-gold);
+    top: 56px;
+    max-height: calc(100vh - 56px);
   }
-  .nav.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+  .brand-logo {
+    width: 32px;
+    height: 32px;
   }
-  .nav a:not(.btn) {
-    font-size: 1.1rem;
-    font-family: var(--font-serif);
-    color: var(--text-white);
+  .brand-text strong {
+    font-size: 0.95rem;
   }
-  .nav-cta {
-    width: 100%;
-    margin-top: 10px;
-  }
-  .burger {
-    display: flex;
+  .brand-text span {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
   }
 
   .section {
-    padding: 48px 0;
+    padding: 44px 0;
+  }
+  .hero {
+    padding: 32px 0 48px;
   }
   .hero-title {
-    font-size: 2.1rem;
+    font-size: clamp(1.8rem, 6vw, 2.25rem);
+    line-height: 1.2;
+  }
+  .hero-lead {
+    font-size: 0.94rem;
+    margin-bottom: 24px;
   }
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
+    margin-bottom: 28px;
   }
   .hero-actions .btn {
     width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
   }
   .hero-proof {
     flex-direction: column;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 10px;
+    padding-top: 16px;
   }
+
+  /* Áreas de Atuação */
+  .areas-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    padding: 22px 18px;
+  }
+
+  /* Advogadas no Mobile */
   .member {
     grid-template-columns: 1fr;
   }
-  .member-body {
-    padding: 0 18px 20px;
-  }
   .portrait {
-    padding: 18px 18px 12px;
+    padding: 22px 18px 12px;
   }
   .arch {
-    max-width: 180px;
+    max-width: 160px;
     margin: 0 auto;
   }
-  .tcard {
-    min-width: 260px;
-    max-width: 260px;
-    padding: 20px 16px;
+  .member-body {
+    padding: 0 18px 22px;
+    text-align: center;
   }
+  .chips {
+    justify-content: center;
+  }
+
+  /* Cidades do Interior */
+  .city-list {
+    gap: 6px;
+  }
+  .city-list button {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  /* Depoimentos */
+  .tcard {
+    min-width: 82vw;
+    max-width: 300px;
+    padding: 20px 18px;
+  }
+
+  /* Formulário de Contato e Prevenção de Zoom no iOS Safari */
   .form {
     grid-template-columns: 1fr;
-    padding: 20px;
+    padding: 20px 16px;
+    gap: 12px;
   }
   .field-wide {
     grid-column: span 1;
   }
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 16px !important; /* Impede zoom automático invasivo do Safari no iOS */
+    padding: 12px 14px;
+  }
+  .form-ok {
+    grid-column: span 1;
+  }
+
+  /* CTA Band e Rodapé */
   .cta-band {
-    padding: 20px 18px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .cta-band .btn {
+    width: 100%;
+    justify-content: center;
   }
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 28px;
   }
+  .footer-brand {
+    grid-column: span 1;
+  }
+
+  /* Botão Flutuante Seguro */
   .float-cta {
-    bottom: 16px;
-    right: 16px;
-    padding: 9px 15px;
-    font-size: 0.8rem;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    right: 14px;
+    padding: 9px 14px;
+    font-size: 0.78rem;
+  }
+}
+
+/* 4. TELAS MUITO PEQUENAS (max-width: 380px) */
+@media (max-width: 380px) {
+  .wrap {
+    padding: 0 14px;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .stat-num {
+    font-size: 2rem;
+  }
+  .hero-seal-badge {
+    padding: 4px 10px 4px 6px;
+    font-size: 0.72rem;
+  }
+  .hero-seal-badge .seal-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .brand-text strong {
+    font-size: 0.88rem;
+  }
+  .brand-text span {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
   }
 }

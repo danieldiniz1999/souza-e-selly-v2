@@ -1,7 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const root = __dirname;
+const __filename = fileURLToPath(import.meta.url);
+const root = path.dirname(__filename);
 const dist = path.join(root, 'dist');
 const pub = path.join(root, 'public');
 
