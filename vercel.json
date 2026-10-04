@@ -1,9 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node build.js",
-  "outputDirectory": ".",
-  "cleanUrls": false,
-  "trailingSlash": false,
+  "framework": "vite",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/(.*)",
@@ -32,15 +31,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(css|js)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     }
