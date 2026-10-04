@@ -103,17 +103,25 @@
   }
 
   /* ==========================================================================
-     2. BARRA DE PROGRESSO DE SCROLL
+     2. BARRA DE PROGRESSO DE SCROLL & BOTÃO FLUTUANTE
      ========================================================================== */
   function initProgressBar() {
     const progressBar = document.querySelector('.progress span');
-    if (!progressBar) return;
+    const floatCta = document.querySelector('.float-cta');
 
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = `${progress}%`;
+      if (progressBar) progressBar.style.width = `${progress}%`;
+
+      if (floatCta) {
+        if (scrollTop > 260) {
+          floatCta.classList.add('is-visible');
+        } else {
+          floatCta.classList.remove('is-visible');
+        }
+      }
     }, { passive: true });
   }
 

@@ -7,7 +7,14 @@ const pub = path.join(root, 'public');
 
 [dist, pub].forEach(target => {
   if (!fs.existsSync(target)) fs.mkdirSync(target, { recursive: true });
-  fs.copyFileSync(path.join(root, 'index.html'), path.join(target, 'index.html'));
+
+  ['index.html', '404.html'].forEach(file => {
+    const src = path.join(root, file);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, path.join(target, file));
+    }
+  });
+
   ['css', 'js', 'assets'].forEach(dir => {
     const srcDir = path.join(root, dir);
     const destDir = path.join(target, dir);
@@ -17,4 +24,4 @@ const pub = path.join(root, 'public');
   });
 });
 
-console.log('Build completed: files exported to dist/ and public/');
+console.log('Build completed: all static files mirrored to dist/ and public/');
