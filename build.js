@@ -12,7 +12,7 @@ const pub = path.join(root, 'public');
     const srcDir = path.join(root, dir);
     const destDir = path.join(target, dir);
     if (fs.existsSync(srcDir)) {
-      fs.cpSync(srcDir, destDir, { recursive: true });
+      fs.cpSync(srcDir, destDir, { recursive: true, force: true });
     }
   });
 });
