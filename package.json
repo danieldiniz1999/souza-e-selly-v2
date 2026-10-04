@@ -4,7 +4,7 @@
   "private": true,
   "description": "Souza & Selly Advocacia — Landing page institucional e comercial de alto padrão",
   "scripts": {
-    "build": "echo 'Static site ready'",
+    "build": "node build.js",
     "start": "node server.js",
     "dev": "node server.js"
   }

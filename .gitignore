@@ -15,6 +15,7 @@ node_modules/
 
 # Vercel deployment
 .vercel
+dist/
 
 # Environment variables
 .env
