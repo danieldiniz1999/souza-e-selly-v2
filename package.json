@@ -1,0 +1,21 @@
+{
+  "name": "souza-e-selly-v2",
+  "version": "1.0.0",
+  "description": "Souza & Selly Advocacia — Landing page institucional e comercial de alto padrão",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "advocacia",
+    "direito-previdenciario",
+    "direito-trabalhista",
+    "direito-civel",
+    "fortaleza",
+    "ceara",
+    "landing-page"
+  ],
+  "author": "Souza & Selly Advocacia",
+  "license": "UNLICENSED"
+}
