@@ -11,6 +11,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    cssMinify: true,
+    assetsInlineLimit: 4096,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),

@@ -108,19 +108,32 @@
   function initProgressBar() {
     const progressBar = document.querySelector('.progress span');
     const floatCta = document.querySelector('.float-cta');
+    if (!progressBar && !floatCta) return;
+
+    let ticking = false;
+    let docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    window.addEventListener('resize', () => {
+      docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    }, { passive: true });
 
     window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      if (progressBar) progressBar.style.width = `${progress}%`;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          if (progressBar) progressBar.style.width = `${progress}%`;
 
-      if (floatCta) {
-        if (scrollTop > 260) {
-          floatCta.classList.add('is-visible');
-        } else {
-          floatCta.classList.remove('is-visible');
-        }
+          if (floatCta) {
+            if (scrollTop > 260) {
+              floatCta.classList.add('is-visible');
+            } else {
+              floatCta.classList.remove('is-visible');
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     }, { passive: true });
   }
@@ -227,15 +240,15 @@
       children.forEach((child, idx) => {
         setTimeout(() => {
           child.classList.add('revealed');
-        }, idx * 100);
+        }, idx * 60);
       });
     }
 
     if ('IntersectionObserver' in window) {
       const observerOptions = {
         root: null,
-        rootMargin: '100px 0px 50px 0px',
-        threshold: 0.02
+        rootMargin: '120px 0px 50px 0px',
+        threshold: 0.01
       };
 
       const revealObserver = new IntersectionObserver((entries, obs) => {
@@ -247,14 +260,7 @@
         });
       }, observerOptions);
 
-      revealEls.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 150) {
-          revealElement(el);
-        } else {
-          revealObserver.observe(el);
-        }
-      });
+      revealEls.forEach((el) => revealObserver.observe(el));
 
       const staggerObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach((entry) => {
@@ -265,21 +271,13 @@
         });
       }, observerOptions);
 
-      staggerContainers.forEach((container) => {
-        const rect = container.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 150) {
-          revealStagger(container);
-        } else {
-          staggerObserver.observe(container);
-        }
-      });
+      staggerContainers.forEach((container) => staggerObserver.observe(container));
     } else {
-      // Fallback sem IntersectionObserver
       revealEls.forEach(revealElement);
       staggerContainers.forEach(revealStagger);
     }
 
-    // Safety fallback: garante que nada fique oculto após 1.2s
+    // Fallback de garantia leve
     setTimeout(() => {
       revealEls.forEach(revealElement);
       staggerContainers.forEach(revealStagger);
@@ -287,51 +285,61 @@
   }
 
   /* ==========================================================================
-     6. CARD 3D TILT EFFECT
+     6. CARD 3D TILT EFFECT (RAF THROTTLED)
      ========================================================================== */
   function initTilt() {
     const cards = document.querySelectorAll('[data-tilt]');
     if (!cards.length || window.matchMedia('(pointer: coarse)').matches) return;
 
     cards.forEach((card) => {
+      let rafId = null;
       card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
 
-        const deltaX = (x - centerX) / centerX;
-        const deltaY = (y - centerY) / centerY;
+          const deltaX = (x - centerX) / centerX;
+          const deltaY = (y - centerY) / centerY;
 
-        const tiltX = deltaY * -7;
-        const tiltY = deltaX * 7;
+          const tiltX = deltaY * -7;
+          const tiltY = deltaX * 7;
 
-        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
-      });
+          card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+        });
+      }, { passive: true });
 
       card.addEventListener('mouseleave', () => {
+        if (rafId) cancelAnimationFrame(rafId);
         card.style.transform = '';
       });
     });
   }
 
   /* ==========================================================================
-     7. MAGNETIC BUTTON EFFECT
+     7. MAGNETIC BUTTON EFFECT (RAF THROTTLED)
      ========================================================================== */
   function initMagneticButtons() {
     const buttons = document.querySelectorAll('[data-magnetic]');
     if (!buttons.length || window.matchMedia('(pointer: coarse)').matches) return;
 
     buttons.forEach((btn) => {
+      let rafId = null;
       btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
-      });
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+        });
+      }, { passive: true });
 
       btn.addEventListener('mouseleave', () => {
+        if (rafId) cancelAnimationFrame(rafId);
         btn.style.transform = '';
       });
     });
@@ -362,12 +370,19 @@
     });
 
     if (progressBar) {
+      let sliderTicking = false;
       slider.addEventListener('scroll', () => {
-        const maxScroll = slider.scrollWidth - slider.clientWidth;
-        if (maxScroll > 0) {
-          const ratio = slider.scrollLeft / maxScroll;
-          const leftPercent = ratio * (100 - 16.66);
-          progressBar.style.left = `${Math.max(0, Math.min(leftPercent, 83.33))}%`;
+        if (!sliderTicking) {
+          window.requestAnimationFrame(() => {
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            if (maxScroll > 0) {
+              const ratio = slider.scrollLeft / maxScroll;
+              const leftPercent = ratio * (100 - 16.66);
+              progressBar.style.left = `${Math.max(0, Math.min(leftPercent, 83.33))}%`;
+            }
+            sliderTicking = false;
+          });
+          sliderTicking = true;
         }
       }, { passive: true });
     }

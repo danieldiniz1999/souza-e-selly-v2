@@ -124,6 +124,8 @@ body::before {
   width: 0%;
   background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+  transform: translateZ(0);
+  will-change: width;
   transition: width 0.08s linear;
 }
 
@@ -174,6 +176,8 @@ body::before {
 .section {
   padding: 64px 0;
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 .section-raised {
   background-color: var(--bg-surface);
@@ -912,12 +916,21 @@ body::before {
   opacity: 0.8;
   position: absolute;
 }
+.arch picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.arch picture img,
 .arch img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: relative;
   z-index: 1;
+  display: block;
 }
 
 .member-body {
@@ -1546,13 +1559,14 @@ body::before {
   font-size: 0.82rem;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(16px);
+  transform: translateY(16px) translateZ(0);
   transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease;
+  will-change: opacity, transform;
 }
 .float-cta.is-visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 /* ---------- SVG MAP CEARÁ ---------- */

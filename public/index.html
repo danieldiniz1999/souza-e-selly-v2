@@ -16,8 +16,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="assets/og-image.jpg">
 
-  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="preload" as="image" href="assets/logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -30,7 +32,7 @@
     "@type": "LegalService",
     "name": "Souza & Selly Advocacia",
     "image": "assets/og-image.jpg",
-    "logo": "assets/logo.png",
+    "logo": "assets/logo.webp",
     "description": "Escritório de advocacia em Fortaleza com atuação em direito previdenciário, trabalhista e cível, atendendo todo o estado do Ceará.",
     "areaServed": { "@type": "State", "name": "Ceará" },
     "address": {
@@ -74,7 +76,7 @@
   <header class="site-header" id="topo">
     <div class="wrap header-inner">
       <a class="brand" href="#inicio" aria-label="Souza &amp; Selly Advocacia, ir para o início">
-        <img class="brand-logo" src="assets/logo.png" alt="Selo Oficial Souza &amp; Selly Advocacia" width="38" height="38">
+        <img class="brand-logo" src="assets/logo.webp" alt="Selo Oficial Souza &amp; Selly Advocacia" width="38" height="38" loading="eager" decoding="async">
         <span class="brand-text"><strong>Souza <em>&amp;</em> Selly</strong><span>Advocacia</span></span>
       </a>
 
@@ -103,7 +105,7 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <div class="hero-seal-badge enter" style="--d:.55s">
-            <img src="assets/logo.png" alt="Selo Oficial Souza &amp; Selly" width="22" height="22" class="seal-icon">
+            <img src="assets/logo.webp" alt="Selo Oficial Souza &amp; Selly" width="22" height="22" class="seal-icon" loading="eager" decoding="async">
             <span>Sede em Fortaleza · Todo o Ceará</span>
           </div>
           <h1 class="hero-title" id="hero-title">
@@ -246,7 +248,7 @@
       <div class="wrap about-grid">
         <div class="about-copy">
           <div class="about-seal" data-reveal="up">
-            <img src="assets/logo.png" alt="Selo Oficial Souza &amp; Selly Advocacia" width="48" height="48" class="seal-emblem">
+            <img src="assets/logo.webp" alt="Selo Oficial Souza &amp; Selly Advocacia" width="48" height="48" class="seal-emblem" loading="lazy" decoding="async">
             <div class="about-seal-text">
               <span class="seal-title">Souza &amp; Selly Advocacia</span>
               <span class="seal-sub">Excelência jurídica &amp; compromisso ético</span>
@@ -315,12 +317,15 @@
         </div>
 
         <div class="team-grid">
-          <!-- Para usar a foto real, salve o arquivo em assets/dra-samara.jpg (retrato, proporção 4:5) -->
+          <!-- Dra. Samara Selly -->
           <article class="member" data-reveal="wipe">
             <div class="portrait">
               <div class="arch">
                 <span class="mono" aria-hidden="true">S</span>
-                <img src="assets/dra-samara.jpg" alt="Dra. Samara Selly" loading="lazy" onerror="this.remove()">
+                <picture>
+                  <source srcset="assets/dra-samara.webp" type="image/webp">
+                  <img src="assets/dra-samara.jpg" alt="Dra. Samara Selly" width="160" height="200" loading="lazy" decoding="async" onerror="this.remove()">
+                </picture>
               </div>
             </div>
             <div class="member-body">
@@ -336,12 +341,15 @@
             </div>
           </article>
 
-          <!-- Para usar a foto real, salve o arquivo em assets/dra-maria.jpg (retrato, proporção 4:5) -->
+          <!-- Dra. Maria Souza -->
           <article class="member" data-reveal="wipe" style="--i:1">
             <div class="portrait">
               <div class="arch">
                 <span class="mono" aria-hidden="true">M</span>
-                <img src="assets/dra-maria.jpg" alt="Dra. Maria Souza" loading="lazy" onerror="this.remove()">
+                <picture>
+                  <source srcset="assets/dra-maria.webp" type="image/webp">
+                  <img src="assets/dra-maria.jpg" alt="Dra. Maria Souza" width="160" height="200" loading="lazy" decoding="async" onerror="this.remove()">
+                </picture>
               </div>
             </div>
             <div class="member-body">
@@ -570,7 +578,7 @@
 
           <div class="contact-side">
             <div class="contact-brand-head" data-reveal="up">
-              <img src="assets/logo.png" alt="Selo Oficial Souza &amp; Selly" width="44" height="44" class="seal-icon">
+              <img src="assets/logo.webp" alt="Selo Oficial Souza &amp; Selly" width="44" height="44" class="seal-icon" loading="lazy" decoding="async">
               <div>
                 <strong>Souza &amp; Selly Advocacia</strong>
                 <span class="small muted">Atendimento em todo o Ceará</span>
@@ -604,7 +612,7 @@
     <div class="wrap footer-grid">
       <div class="footer-brand">
         <a class="brand" href="#inicio" aria-label="Voltar ao topo">
-          <img class="brand-logo" src="assets/logo.png" alt="Selo Oficial Souza &amp; Selly Advocacia" width="38" height="38">
+          <img class="brand-logo" src="assets/logo.webp" alt="Selo Oficial Souza &amp; Selly Advocacia" width="38" height="38" loading="lazy" decoding="async">
           <span class="brand-text"><strong>Souza <em>&amp;</em> Selly</strong><span>Advocacia</span></span>
         </a>
         <p class="small muted">Direito previdenciário, trabalhista e cível. Sede em Fortaleza, atendimento em todo o Ceará.</p>
